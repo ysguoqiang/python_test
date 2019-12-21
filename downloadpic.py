@@ -1,28 +1,9 @@
 import threading
 import requests
-import logging
+import logger
 import os
 import re
-
-logger = logging.getLogger(__name__)
-logging.root.setLevel(logging.DEBUG)
-logFormat = logging.Formatter('%(asctime)s %(filename)s:%(lineno)s %(funcName)s %(levelname)s %(message)s')
-
-sh = logging.StreamHandler()
-sh.setLevel(logging.INFO)
-sh.setFormatter(logFormat)
-logger.addHandler(sh)
-
-# th = handlers.TimedRotatingFileHandler(filename='new.log',when='D',backupCount=3,encoding='utf-8')
-fh = logging.FileHandler('get.log', mode='w', encoding='utf-8')
-fh.setLevel(logging.ERROR)
-fh.setFormatter(logFormat)
-logger.addHandler(fh)
-
-proxies = {
-  "http": "http://127.0.0.1:1080",
-  "https": "http://127.0.0.1:1080",
-}
+import proxy  
 
 def download_file(url, path, dst_name):
     try:
